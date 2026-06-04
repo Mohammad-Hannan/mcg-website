@@ -10,6 +10,109 @@
   --bitcoin-dark: #D4780E;
   --obsidian: #0D0D0D;
   --gold: #C9A85C;
+
+  /* Dark theme (default) */
+  --bg-primary: #0D0D0D;
+  --bg-secondary: #111111;
+  --bg-card: rgba(255,255,255,0.02);
+  --bg-card-hover: rgba(255,255,255,0.04);
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-hover: rgba(247,147,26,0.15);
+  --text-primary: #FAFAFA;
+  --text-secondary: rgba(255,255,255,0.55);
+  --text-muted: rgba(255,255,255,0.30);
+  --text-faint: rgba(255,255,255,0.20);
+  --grid-line: rgba(247,147,26,0.04);
+  --nav-bg: rgba(13,13,13,0.95);
+  --glow-color: rgba(247,147,26,0.12);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  --bg-primary: #F5F2EE;
+  --bg-secondary: #EEEBE5;
+  --bg-card: rgba(0,0,0,0.03);
+  --bg-card-hover: rgba(0,0,0,0.05);
+  --border-subtle: rgba(0,0,0,0.08);
+  --border-hover: rgba(247,147,26,0.30);
+  --text-primary: #0D0D0D;
+  --text-secondary: rgba(0,0,0,0.60);
+  --text-muted: rgba(0,0,0,0.40);
+  --text-faint: rgba(0,0,0,0.25);
+  --grid-line: rgba(247,147,26,0.06);
+  --nav-bg: rgba(245,242,238,0.95);
+  --glow-color: rgba(247,147,26,0.10);
+}
+
+/* Apply theme variables to base elements */
+body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .card-glass {
+  background: var(--bg-card) !important;
+  border-color: var(--border-subtle) !important;
+}
+[data-theme="light"] .card-glass:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--border-hover) !important;
+}
+[data-theme="light"] .bg-obsidian-900,
+[data-theme="light"] .bg-obsidian-800\/30,
+[data-theme="light"] .bg-obsidian-800\/60 {
+  background-color: var(--bg-primary) !important;
+}
+[data-theme="light"] .bg-obsidian-700 {
+  background-color: var(--bg-secondary) !important;
+}
+[data-theme="light"] .text-white {
+  color: var(--text-primary) !important;
+}
+[data-theme="light"] .text-white\/90,
+[data-theme="light"] .text-white\/75,
+[data-theme="light"] .text-white\/70,
+[data-theme="light"] .text-white\/60 {
+  color: var(--text-secondary) !important;
+}
+[data-theme="light"] .text-white\/55,
+[data-theme="light"] .text-white\/50,
+[data-theme="light"] .text-white\/45,
+[data-theme="light"] .text-white\/40,
+[data-theme="light"] .text-white\/35 {
+  color: var(--text-muted) !important;
+}
+[data-theme="light"] .text-white\/30,
+[data-theme="light"] .text-white\/25,
+[data-theme="light"] .text-white\/20,
+[data-theme="light"] .text-white\/15 {
+  color: var(--text-faint) !important;
+}
+[data-theme="light"] .border-white\/\[0\.04\],
+[data-theme="light"] .border-white\/\[0\.06\],
+[data-theme="light"] .border-white\/\[0\.08\],
+[data-theme="light"] .border-white\/10,
+[data-theme="light"] .border-white\/20 {
+  border-color: var(--border-subtle) !important;
+}
+[data-theme="light"] .bg-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) !important;
+}
+[data-theme="light"] .divide-white\/\[0\.04\] > * + * {
+  border-color: var(--border-subtle) !important;
+}
+[data-theme="light"] input,
+[data-theme="light"] textarea {
+  background-color: var(--bg-secondary) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+[data-theme="light"] input::placeholder,
+[data-theme="light"] textarea::placeholder {
+  color: var(--text-muted) !important;
 }
 
 * {

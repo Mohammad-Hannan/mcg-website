@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -14,9 +15,48 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+  return (
+    <motion.button
+      onClick={toggle}
+      whileTap={{ scale: 0.9 }}
+      aria-label="Toggle theme"
+      className="relative w-9 h-9 flex items-center justify-center rounded-sm border border-white/10 hover:border-bitcoin/30 transition-colors duration-200 group overflow-hidden"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {theme === "dark" ? (
+          <motion.span
+            key="sun"
+            initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+            transition={{ duration: 0.2 }}
+            className="absolute"
+          >
+            <Sun size={15} className="text-white/50 group-hover:text-bitcoin transition-colors duration-200" />
+          </motion.span>
+        ) : (
+          <motion.span
+            key="moon"
+            initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+            transition={{ duration: 0.2 }}
+            className="absolute"
+          >
+            <Moon size={15} className="text-obsidian-900/50 group-hover:text-bitcoin transition-colors duration-200" />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  );
+}
+
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme } = useTheme();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -29,6 +69,8 @@ export default function Navigation() {
     setMobileOpen(false);
   }, [pathname]);
 
+  const isLight = theme === "light";
+
   return (
     <>
       <motion.header
@@ -37,7 +79,7 @@ export default function Navigation() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-obsidian-900/95 backdrop-blur-xl border-b border-white/[0.04]"
+            ? `backdrop-blur-xl border-b ${isLight ? "bg-[#F5F2EE]/95 border-black/[0.06]" : "bg-obsidian-900/95 border-white/[0.04]"}`
             : "bg-transparent"
         }`}
       >
@@ -52,7 +94,7 @@ export default function Navigation() {
                 <div className="absolute inset-0 rounded-sm bg-bitcoin opacity-0 group-hover:opacity-30 blur-md transition-opacity duration-300" />
               </div>
               <div>
-                <div className="text-white font-bold text-sm tracking-wider uppercase leading-none">
+                <div className={`font-bold text-sm tracking-wider uppercase leading-none transition-colors duration-300 ${isLight ? "text-obsidian-900" : "text-white"}`}>
                   Market Capital
                 </div>
                 <div className="text-bitcoin/80 text-[9px] tracking-[0.25em] uppercase font-medium leading-none mt-0.5">
@@ -70,6 +112,8 @@ export default function Navigation() {
                   className={`text-sm font-medium tracking-wide transition-colors duration-200 animated-underline ${
                     pathname === link.href
                       ? "text-bitcoin"
+                      : isLight
+                      ? "text-obsidian-900/50 hover:text-obsidian-900"
                       : "text-white/60 hover:text-white"
                   }`}
                 >
@@ -78,8 +122,9 @@ export default function Navigation() {
               ))}
             </nav>
 
-            {/* CTA */}
-            <div className="hidden md:flex items-center gap-4">
+            {/* CTA + Toggle */}
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
               <Link
                 href="/contact"
                 className="group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold tracking-wide overflow-hidden rounded-sm border border-bitcoin/40 text-bitcoin hover:text-black transition-colors duration-300"
@@ -89,14 +134,17 @@ export default function Navigation() {
               </Link>
             </div>
 
-            {/* Mobile menu button */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 text-white/70 hover:text-white transition-colors"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            {/* Mobile: toggle + hamburger */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className={`p-2 transition-colors ${isLight ? "text-obsidian-900/60 hover:text-obsidian-900" : "text-white/70 hover:text-white"}`}
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.header>
@@ -109,7 +157,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 bg-obsidian-900/98 backdrop-blur-xl pt-20 md:hidden"
+            className={`fixed inset-0 z-40 backdrop-blur-xl pt-20 md:hidden ${isLight ? "bg-[#F5F2EE]/98" : "bg-obsidian-900/98"}`}
           >
             <div className="px-6 py-8 flex flex-col gap-2">
               {navLinks.map((link, i) => (
@@ -121,10 +169,12 @@ export default function Navigation() {
                 >
                   <Link
                     href={link.href}
-                    className={`block py-4 text-xl font-medium border-b border-white/[0.06] transition-colors ${
+                    className={`block py-4 text-xl font-medium border-b transition-colors ${
                       pathname === link.href
                         ? "text-bitcoin"
-                        : "text-white/70 hover:text-white"
+                        : isLight
+                        ? "text-obsidian-900/60 hover:text-obsidian-900 border-black/[0.06]"
+                        : "text-white/70 hover:text-white border-white/[0.06]"
                     }`}
                   >
                     {link.label}

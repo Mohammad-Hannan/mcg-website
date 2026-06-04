@@ -1,0 +1,140 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --bitcoin-orange: #F7931A;
+  --bitcoin-dark: #D4780E;
+  --obsidian: #0D0D0D;
+  --gold: #C9A85C;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0D0D0D;
+  color: #FAFAFA;
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+::-webkit-scrollbar-thumb {
+  background: #F7931A;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4780E;
+}
+
+/* Selection */
+::selection {
+  background: rgba(247, 147, 26, 0.25);
+  color: #FAFAFA;
+}
+
+/* Grid background utility */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(247,147,26,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,147,26,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Glow utilities */
+.glow-orange {
+  box-shadow: 0 0 30px rgba(247, 147, 26, 0.15), 0 0 60px rgba(247, 147, 26, 0.05);
+}
+
+.glow-text-orange {
+  text-shadow: 0 0 40px rgba(247, 147, 26, 0.4);
+}
+
+/* Bitcoin symbol gradient */
+.bitcoin-gradient {
+  background: linear-gradient(135deg, #F7931A 0%, #C9A85C 50%, #F7931A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Line clamp */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Divider */
+.divider-orange {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(247,147,26,0.4) 50%, transparent 100%);
+}
+
+/* Tag pill */
+.tag-pill {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium tracking-widest uppercase;
+  background: rgba(247, 147, 26, 0.08);
+  border: 1px solid rgba(247, 147, 26, 0.2);
+  color: #F7931A;
+}
+
+/* Card glass */
+.card-glass {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.card-glass:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(247, 147, 26, 0.15);
+}
+
+/* Animated underline */
+.animated-underline {
+  position: relative;
+}
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #F7931A;
+  transition: width 0.3s ease;
+}
+.animated-underline:hover::after {
+  width: 100%;
+}

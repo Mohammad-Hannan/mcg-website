@@ -98,7 +98,6 @@ body {
 }
 /* ── Institutional redesign (whale hero / homepage sections / footer) ── */
 [data-theme="light"] .bg-charcoal-deep,
-[data-theme="light"] .bg-charcoal-deep\/25,
 [data-theme="light"] .bg-charcoal-deep\/95,
 [data-theme="light"] .bg-charcoal-deep\/98,
 [data-theme="light"] .bg-charcoal-black {
@@ -155,9 +154,13 @@ body {
 [data-theme="light"] .whale-locked .text-silver\/40 {
   color: #A3A3A3 !important;
 }
-[data-theme="light"] .whale-locked.bg-charcoal-deep,
-[data-theme="light"] .whale-locked .bg-charcoal-deep\/25 {
+[data-theme="light"] .whale-locked.bg-charcoal-deep {
   background-color: #0D0D0D !important;
+}
+/* This translucent tint sits directly over the whale photo — it must stay
+   a 25%-opacity rgba, never an opaque solid, or it blacks out the image. */
+[data-theme="light"] .whale-locked .bg-charcoal-deep\/25 {
+  background-color: rgba(13, 13, 13, 0.25) !important;
 }
 
 [data-theme="light"] .bg-grid {

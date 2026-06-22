@@ -8,7 +8,7 @@ export default function WhaleHero() {
   const { open } = useQualificationModal();
 
   return (
-    <section className="relative min-h-screen flex flex-col items-start justify-center overflow-hidden bg-charcoal-deep">
+    <section className="whale-locked relative min-h-screen flex flex-col items-start justify-center overflow-hidden bg-charcoal-deep">
       {/* Background image — optimized via next/image */}
       <Image
         src="/images/whale-tail.jpg"
@@ -34,6 +34,8 @@ export default function WhaleHero() {
       {/* Subtle bottom fade into next section */}
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-charcoal-deep to-transparent" />
 
+      {/* whale-locked keeps this hero permanently dark — it sits on a dark photo
+          and must stay legible no matter what theme the rest of the site is in */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 pt-32 pb-24">
         {/* Pre-header eyebrow hook */}
         <motion.div

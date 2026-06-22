@@ -73,7 +73,7 @@ export function QualificationModalProvider({ children }: { children: React.React
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full max-w-lg bg-[#121212] border border-[#2C2C2C] rounded-sm overflow-hidden"
+              className="whale-locked relative w-full max-w-lg bg-[#121212] border border-[#2C2C2C] rounded-sm overflow-hidden"
             >
               {/* Close button */}
               <button

@@ -24,6 +24,12 @@ export const metadata: Metadata = {
       "Boutique institutional Bitcoin risk management for serious long-term investors.",
     siteName: "Market Capital Group",
     type: "website",
+    images: [{ url: "/images/logo.jpg", width: 2001, height: 2001 }],
+  },
+  icons: {
+    icon: "/images/logo.jpg",
+    shortcut: "/images/logo.jpg",
+    apple: "/images/logo.jpg",
   },
 };
 

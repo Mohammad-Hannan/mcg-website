@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -19,14 +20,14 @@ export default function Footer() {
         <div className="py-16 grid md:grid-cols-[1fr_auto] gap-12 items-start">
           {/* Brand */}
           <div className="max-w-sm">
-            <Link href="/" className="flex items-center gap-3 mb-5 group w-fit">
-              <div className="w-9 h-9 rounded-sm bg-burnt flex items-center justify-center opacity-70">
-                <span className="text-white font-black text-lg leading-none">₿</span>
-              </div>
-              <div>
-                <div className="text-silver font-bold text-sm tracking-wider uppercase leading-none">Market Capital</div>
-                <div className="text-silver/50 text-[9px] tracking-[0.25em] uppercase font-medium leading-none mt-0.5">Group</div>
-              </div>
+            <Link href="/" className="flex items-center gap-3 mb-5 group w-fit opacity-80 hover:opacity-100 transition-opacity duration-200">
+              <Image
+                src="/images/logo.png"
+                alt="Market Capital Group"
+                width={1412}
+                height={541}
+                className="h-8 w-auto object-contain"
+              />
             </Link>
             <p className="text-silver/40 text-sm leading-relaxed mb-6">
               A non-custodial Bitcoin risk management firm helping serious long-term

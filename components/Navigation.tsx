@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
@@ -90,19 +91,14 @@ export default function Navigation() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative">
-                <div className="w-9 h-9 rounded-sm bg-burnt flex items-center justify-center">
-                  <span className="text-white font-black text-lg leading-none">₿</span>
-                </div>
-              </div>
-              <div>
-                <div className={`font-bold text-sm tracking-wider uppercase leading-none transition-colors duration-300 ${isLight ? "text-obsidian-900" : "text-white"}`}>
-                  Market Capital
-                </div>
-                <div className="text-burnt text-[9px] tracking-[0.25em] uppercase font-medium leading-none mt-0.5">
-                  Group
-                </div>
-              </div>
+              <Image
+                src="/images/logo.png"
+                alt="Market Capital Group"
+                width={1412}
+                height={541}
+                priority
+                className="h-9 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop nav */}

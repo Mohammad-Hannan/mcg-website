@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
-import ThemeProvider from "@/components/ThemeProvider";
-import { QualificationModalProvider } from "@/components/QualificationModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,15 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} scroll-smooth`}>
-      <body className="bg-obsidian-900 text-white antialiased overflow-x-hidden">
-        <ThemeProvider>
-          <QualificationModalProvider>
-            <Navigation />
-            <main>{children}</main>
-            <Footer />
-          </QualificationModalProvider>
-        </ThemeProvider>
-      </body>
+      <body className="antialiased overflow-x-hidden">{children}</body>
     </html>
   );
 }

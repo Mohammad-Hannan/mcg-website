@@ -212,6 +212,61 @@ body {
   color: #F7931A;
 }
 
+/* ── Institutional redesign utilities ───────────────────────────── */
+
+/* Flat divider line */
+.divider-flat {
+  height: 1px;
+  background: #2C2C2C;
+}
+
+/* Burnt orange solid button — no glow, no gradient */
+.btn-burnt {
+  @apply inline-flex items-center justify-center gap-2 px-8 py-4 font-bold text-sm tracking-wider uppercase rounded-sm;
+  background: #D35400;
+  color: #FFFFFF;
+  transition: background-color 0.2s ease;
+}
+.btn-burnt:hover {
+  background: #B34700;
+}
+
+/* Square orange bullet marker */
+.bullet-square {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #D35400;
+  flex-shrink: 0;
+  margin-top: 0.45em;
+}
+
+/* Card with orange top border accent */
+.card-accent-top {
+  border-top: 1px solid #D35400;
+  background: #1A1A1A;
+}
+
+/* Monospace tabular figures for data/metrics */
+.font-mono-data {
+  font-family: 'SF Mono', 'Roboto Mono', 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Pre-header eyebrow text */
+.eyebrow-mono {
+  font-family: 'SF Mono', 'Roboto Mono', 'Courier New', monospace;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* Modal backdrop */
+.modal-backdrop {
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(8px);
+}
+
 /* Card glass */
 .card-glass {
   background: rgba(255, 255, 255, 0.02);

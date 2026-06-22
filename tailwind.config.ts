@@ -29,6 +29,22 @@ const config: Config = {
           light: "#E0C07A",
           muted: "#9A7A3E",
         },
+        burnt: {
+          DEFAULT: "#D35400",
+          dark: "#B34700",
+          light: "#E67E22",
+        },
+        silver: {
+          DEFAULT: "#A3A3A3",
+          dim: "#7A7A7A",
+        },
+        divider: "#2C2C2C",
+        charcoal: {
+          DEFAULT: "#121212",
+          deep: "#0D0D0D",
+          card: "#1A1A1A",
+          black: "#050505",
+        },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

@@ -6,8 +6,10 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useQualificationModal } from "@/components/QualificationModal";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Advisory", href: "/advisory" },
@@ -22,7 +24,7 @@ function ThemeToggle() {
       onClick={toggle}
       whileTap={{ scale: 0.9 }}
       aria-label="Toggle theme"
-      className="relative w-9 h-9 flex items-center justify-center rounded-sm border border-white/10 hover:border-bitcoin/30 transition-colors duration-200 group overflow-hidden"
+      className="relative w-9 h-9 flex items-center justify-center rounded-sm border border-white/10 hover:border-burnt/30 transition-colors duration-200 group overflow-hidden"
     >
       <AnimatePresence mode="wait" initial={false}>
         {theme === "dark" ? (
@@ -34,7 +36,7 @@ function ThemeToggle() {
             transition={{ duration: 0.2 }}
             className="absolute"
           >
-            <Sun size={15} className="text-white/50 group-hover:text-bitcoin transition-colors duration-200" />
+            <Sun size={15} className="text-silver/60 group-hover:text-burnt transition-colors duration-200" />
           </motion.span>
         ) : (
           <motion.span
@@ -45,7 +47,7 @@ function ThemeToggle() {
             transition={{ duration: 0.2 }}
             className="absolute"
           >
-            <Moon size={15} className="text-obsidian-900/50 group-hover:text-bitcoin transition-colors duration-200" />
+            <Moon size={15} className="text-obsidian-900/50 group-hover:text-burnt transition-colors duration-200" />
           </motion.span>
         )}
       </AnimatePresence>
@@ -57,6 +59,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme } = useTheme();
+  const { open } = useQualificationModal();
   const pathname = usePathname();
 
   useEffect(() => {
@@ -79,7 +82,7 @@ export default function Navigation() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? `backdrop-blur-xl border-b ${isLight ? "bg-[#F5F2EE]/95 border-black/[0.06]" : "bg-obsidian-900/95 border-white/[0.04]"}`
+            ? `backdrop-blur-xl border-b ${isLight ? "bg-[#F5F2EE]/95 border-black/[0.06]" : "bg-charcoal-deep/95 border-[#2C2C2C]"}`
             : "bg-transparent"
         }`}
       >
@@ -88,16 +91,15 @@ export default function Navigation() {
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative">
-                <div className="w-9 h-9 rounded-sm bg-bitcoin flex items-center justify-center">
-                  <span className="text-black font-black text-lg leading-none">₿</span>
+                <div className="w-9 h-9 rounded-sm bg-burnt flex items-center justify-center">
+                  <span className="text-white font-black text-lg leading-none">₿</span>
                 </div>
-                <div className="absolute inset-0 rounded-sm bg-bitcoin opacity-0 group-hover:opacity-30 blur-md transition-opacity duration-300" />
               </div>
               <div>
                 <div className={`font-bold text-sm tracking-wider uppercase leading-none transition-colors duration-300 ${isLight ? "text-obsidian-900" : "text-white"}`}>
                   Market Capital
                 </div>
-                <div className="text-bitcoin/80 text-[9px] tracking-[0.25em] uppercase font-medium leading-none mt-0.5">
+                <div className="text-burnt text-[9px] tracking-[0.25em] uppercase font-medium leading-none mt-0.5">
                   Group
                 </div>
               </div>
@@ -109,15 +111,20 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium tracking-wide transition-colors duration-200 animated-underline ${
+                  className={`relative text-sm font-medium tracking-wide transition-colors duration-200 group ${
                     pathname === link.href
-                      ? "text-bitcoin"
+                      ? "text-white"
                       : isLight
                       ? "text-obsidian-900/50 hover:text-obsidian-900"
-                      : "text-white/60 hover:text-white"
+                      : "text-silver hover:text-white"
                   }`}
                 >
                   {link.label}
+                  <span
+                    className={`absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-burnt transition-opacity duration-200 ${
+                      pathname === link.href ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                    }`}
+                  />
                 </Link>
               ))}
             </nav>
@@ -125,13 +132,9 @@ export default function Navigation() {
             {/* CTA + Toggle */}
             <div className="hidden md:flex items-center gap-3">
               <ThemeToggle />
-              <Link
-                href="/contact"
-                className="group relative inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold tracking-wide overflow-hidden rounded-sm border border-bitcoin/40 text-bitcoin hover:text-black transition-colors duration-300"
-              >
-                <span className="absolute inset-0 bg-bitcoin translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]" />
-                <span className="relative">Request Playbook</span>
-              </Link>
+              <button onClick={open} className="btn-burnt !px-5 !py-2.5 !text-xs">
+                Request Playbook
+              </button>
             </div>
 
             {/* Mobile: toggle + hamburger */}
@@ -139,7 +142,7 @@ export default function Navigation() {
               <ThemeToggle />
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className={`p-2 transition-colors ${isLight ? "text-obsidian-900/60 hover:text-obsidian-900" : "text-white/70 hover:text-white"}`}
+                className={`p-2 transition-colors ${isLight ? "text-obsidian-900/60 hover:text-obsidian-900" : "text-silver hover:text-white"}`}
                 aria-label="Toggle menu"
               >
                 {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -157,7 +160,7 @@ export default function Navigation() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className={`fixed inset-0 z-40 backdrop-blur-xl pt-20 md:hidden ${isLight ? "bg-[#F5F2EE]/98" : "bg-obsidian-900/98"}`}
+            className={`fixed inset-0 z-40 backdrop-blur-xl pt-20 md:hidden ${isLight ? "bg-[#F5F2EE]/98" : "bg-charcoal-deep/98"}`}
           >
             <div className="px-6 py-8 flex flex-col gap-2">
               {navLinks.map((link, i) => (
@@ -171,10 +174,10 @@ export default function Navigation() {
                     href={link.href}
                     className={`block py-4 text-xl font-medium border-b transition-colors ${
                       pathname === link.href
-                        ? "text-bitcoin"
+                        ? "text-burnt"
                         : isLight
                         ? "text-obsidian-900/60 hover:text-obsidian-900 border-black/[0.06]"
-                        : "text-white/70 hover:text-white border-white/[0.06]"
+                        : "text-silver hover:text-white border-[#2C2C2C]"
                     }`}
                   >
                     {link.label}
@@ -184,15 +187,18 @@ export default function Navigation() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.35 }}
+                transition={{ delay: 0.4 }}
                 className="mt-8"
               >
-                <Link
-                  href="/contact"
-                  className="block w-full text-center py-4 bg-bitcoin text-black font-bold tracking-wide rounded-sm"
+                <button
+                  onClick={() => {
+                    setMobileOpen(false);
+                    open();
+                  }}
+                  className="btn-burnt w-full"
                 >
                   Request Playbook
-                </Link>
+                </button>
               </motion.div>
             </div>
           </motion.div>

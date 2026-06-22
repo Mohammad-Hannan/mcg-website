@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
+import DesignSwitcher from "@/components/DesignSwitcher";
 
 const serif = Playfair_Display({
   subsets: ["latin"],
@@ -304,13 +305,7 @@ export default function Design2Page() {
         </div>
       </footer>
 
-      {/* Floating back-to-design-1 pill */}
-      <Link
-        href="/"
-        className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#0A0A0A] text-white text-sm font-medium shadow-lg hover:bg-[#222] transition-colors"
-      >
-        ← Back to Design 1
-      </Link>
+      <DesignSwitcher active="Design 2" />
     </div>
   );
 }

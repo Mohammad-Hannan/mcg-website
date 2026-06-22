@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useQualificationModal } from "@/components/QualificationModal";
 
@@ -8,13 +9,23 @@ export default function WhaleHero() {
 
   return (
     <section className="relative min-h-screen flex flex-col items-start justify-center overflow-hidden bg-charcoal-deep">
-      {/* Background image layer — swap in real whale tail photo at /public/images/whale-tail.jpg */}
+      {/* Background image — optimized via next/image */}
+      <Image
+        src="/images/whale-tail.jpg"
+        alt="A whale's tail breaking the surface of the ocean"
+        fill
+        priority
+        quality={90}
+        sizes="100vw"
+        className="object-cover"
+      />
+
+      {/* Gradient fade for text legibility (bottom-heavy) */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0"
         style={{
-          backgroundImage:
-            "linear-gradient(180deg, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.55) 60%, rgba(13,13,13,0.92) 100%), url('/images/whale-tail.jpg')",
-          backgroundColor: "#0D0D0D",
+          background:
+            "linear-gradient(180deg, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.55) 60%, rgba(13,13,13,0.92) 100%)",
         }}
       />
       {/* 25% dark charcoal tint overlay per spec */}

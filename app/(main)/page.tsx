@@ -6,6 +6,7 @@ import {
   WhyMCGSection,
   FinalCTASection,
 } from "@/components/HomeSections";
+import DesignSwitcher from "@/components/DesignSwitcher";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       <SolutionSection />
       <WhyMCGSection />
       <FinalCTASection />
+      <DesignSwitcher active="Design 1" />
     </>
   );
 }

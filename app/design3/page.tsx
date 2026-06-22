@@ -130,8 +130,8 @@ export default function Design3Page() {
       {/* Hero */}
       <section className="relative min-h-screen flex flex-col justify-end overflow-hidden">
         <Image
-          src="/images/whale-tail.jpg"
-          alt="A whale's tail breaking the surface of the ocean"
+          src="/images/hero2.jpg"
+          alt="Aerial view of a city skyline and waterfront at dusk"
           fill
           priority
           quality={92}

@@ -50,32 +50,6 @@ function Eyebrow({ children, light = false }: { children: React.ReactNode; light
   );
 }
 
-/* ── Skyline silhouette — CSS/SVG placeholder for the hero photo ──── */
-function SkylineBackdrop() {
-  const bars = [18, 32, 22, 45, 28, 60, 38, 50, 24, 42, 30, 55, 20, 48, 33, 58, 26, 40];
-  return (
-    <svg
-      viewBox="0 0 1200 300"
-      preserveAspectRatio="none"
-      className="absolute bottom-0 left-0 w-full h-full opacity-90"
-    >
-      {bars.map((h, i) => {
-        const w = 1200 / bars.length;
-        return (
-          <rect
-            key={i}
-            x={i * w}
-            y={300 - h * 4}
-            width={w - 3}
-            height={h * 4}
-            fill={i % 3 === 0 ? "#11182B" : i % 2 === 0 ? "#161E33" : "#0D1220"}
-          />
-        );
-      })}
-    </svg>
-  );
-}
-
 /* ── Page ────────────────────────────────────────────────────────── */
 export default function Design2Page() {
   return (
@@ -105,7 +79,15 @@ export default function Design2Page() {
 
       {/* Hero */}
       <section className="relative h-[88vh] min-h-[640px] overflow-hidden bg-[#0A0E1A]">
-        <SkylineBackdrop />
+        <Image
+          src="/images/whale-tail.jpg"
+          alt="A whale's tail breaking the surface of the ocean"
+          fill
+          priority
+          quality={90}
+          sizes="100vw"
+          className="object-cover"
+        />
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(180deg, rgba(10,14,26,0.55) 0%, rgba(10,14,26,0.35) 40%, rgba(10,14,26,0.92) 100%)" }}
